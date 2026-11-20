@@ -4,7 +4,7 @@
 window.BEP_KHOI = {
   phone: "0394 452 784",
   zalo: "0394452784",   // đã xác nhận dùng Zalo (20/11/2026)
-  address: "42 Phan Chu Trinh, Phường 9, Đà Lạt",
+  address: "42 Phan Chu Trinh, Phường Lâm Viên - Đà Lạt",
   parking: "Có bãi đậu xe; ô tô đậu theo ngày chẵn lẻ",
   hours: "10:30 – 14:00 và 16:30 – 22:00, mỗi ngày",
   email: "bepkhoidalat@gmail.com",

@@ -372,6 +372,9 @@ h1, h2, h3, h4 { margin: 0; }
 .pc-more { font-weight: 600; font-size: 14px; color: var(--fire); text-decoration: none; }
 .article-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(32px, 5vw, 64px); align-items: start; }
 .article { max-width: 720px; font-size: 17px; line-height: 1.8; }
+.article-fig { margin: 0 0 24px; }
+.article-fig img { width: 100%; max-height: 520px; object-fit: cover; border-radius: 18px; }
+.article-fig figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); text-align: center; }
 .article-meta { margin: 0 0 18px; font-size: 14px; color: var(--muted); }
 .article .lede { font-size: 19px; color: var(--ink); }
 .article h2 { font: 700 clamp(26px, 3vw, 32px)/1.2 var(--display); margin: 40px 0 12px; }

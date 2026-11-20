@@ -68,7 +68,7 @@ npx http-server bep-khoi -p 5510
 - Mục Hỏi đáp trên trang chủ trả lời giá, cấp cay, giờ, đậu xe, đặt bàn.
 - Đổi giá hay giờ thì sửa cả: trang, khối JSON-LD trong `<head>`, mục Hỏi đáp và `llms.txt`.
 
-## Đăng blog tự động (30 bài, 21/11 – 20/12/2026)
+## Đăng blog tự động (5 bài đăng 20/11, 25 bài 21/11 – 15/12/2026)
 
 - Hàng chờ: `_lich-dang/` (chỉ nằm trên máy này, không đẩy lên GitHub). Mỗi tệp là một bài, tên dạng `2026-12-05-ten-bai.html`, phần đầu tệp ghi ngày đăng, tiêu đề, mô tả, ảnh.
 - Tác vụ Windows **BepKhoi-DangBai** chạy 08:00 và 13:00 mỗi ngày, và 3 phút sau khi đăng nhập Windows (máy bật muộn vẫn chạy bù). Nó gọi `tools/dang-bai.vbs` → `tools/dang-bai.sh` → `tools/dang_bai.py`.

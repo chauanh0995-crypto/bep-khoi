@@ -67,3 +67,14 @@ npx http-server bep-khoi -p 5510
 - `sitemap.xml`, `robots.txt`, `llms.txt` (tóm tắt cho AI), `404.html`.
 - Mục Hỏi đáp trên trang chủ trả lời giá, cấp cay, giờ, đậu xe, đặt bàn.
 - Đổi giá hay giờ thì sửa cả: trang, khối JSON-LD trong `<head>`, mục Hỏi đáp và `llms.txt`.
+
+## Đăng blog tự động (30 bài, 21/11 – 20/12/2026)
+
+- Hàng chờ: `_lich-dang/` (chỉ nằm trên máy này, không đẩy lên GitHub). Mỗi tệp là một bài, tên dạng `2026-12-05-ten-bai.html`, phần đầu tệp ghi ngày đăng, tiêu đề, mô tả, ảnh.
+- Tác vụ Windows **BepKhoi-DangBai** chạy 08:00 và 13:00 mỗi ngày, và 3 phút sau khi đăng nhập Windows (máy bật muộn vẫn chạy bù). Nó gọi `tools/dang-bai.vbs` → `tools/dang-bai.sh` → `tools/dang_bai.py`.
+- Mỗi lần chạy: bài nào tới ngày thì tạo trang `/blog/<ten-bai>/`, cập nhật trang Blog, `sitemap.xml`, `llms.txt`, `blog/bai-viet.json`, rồi commit + push và báo Bing qua IndexNow.
+- Nhật ký: `tools/dang-bai.log`.
+- Sửa bài trước ngày đăng: mở tệp trong `_lich-dang/` và sửa. Đổi ngày: sửa dòng `date:`.
+- Sửa bài đã đăng: sửa thẳng `blog/<ten-bai>/index.html` rồi push.
+- Chạy tay: mở Git Bash, gõ `bash /c/SEODALATNOW/bep-khoi/tools/dang-bai.sh`. Chạy thử không đẩy: `python -X utf8 tools/dang_bai.py --khong-push --ngay 2026-12-01` (chỉ chạy trên bản sao, vì lệnh này vẫn ghi tệp).
+- Máy tính phải bật thì bài mới lên.

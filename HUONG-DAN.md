@@ -53,3 +53,17 @@ npx http-server bep-khoi -p 5510
 - Kho GitHub: https://github.com/chauanh0995-crypto/bep-khoi (nhánh `main`), GitHub Pages phục vụ thẳng từ nhánh này.
 - Tên miền: suoncaykhonglo.vn (file `CNAME`). DNS tại iNET: 4 bản ghi A cho `@` trỏ 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 và CNAME `www` trỏ `chauanh0995-crypto.github.io`.
 - Cập nhật web: sửa file, rồi `git add -A`, `git commit`, `git push`. Khoảng 1 phút sau web tự cập nhật.
+
+## Blog
+
+- Trang danh sách: `blog/index.html`. Mỗi bài là một thư mục `blog/<duong-dan>/index.html` (đường dẫn trên web: `/blog/<duong-dan>/`).
+- Thêm bài mới: sao chép một thư mục bài có sẵn, đổi tên thư mục, sửa tiêu đề, mô tả, nội dung, ảnh bìa và khối `BlogPosting` trong `<head>`. Sau đó thêm thẻ bài vào `blog/index.html`, thêm địa chỉ bài vào `sitemap.xml` và `llms.txt`.
+- Chỉ viết thông tin đã xác nhận (giá theo menu, giờ, địa chỉ). Không bịa số liệu, đánh giá hay khuyến mãi.
+
+## SEO và GEO đã làm (20/11/2026)
+
+- Mỗi trang có tiêu đề, mô tả, `canonical`, ảnh chia sẻ 1200×630 (`images/og-*.jpg`).
+- Dữ liệu có cấu trúc: `Restaurant` + `WebSite` + `FAQPage` (trang chủ), `Menu` có giá 47 món (thực đơn), `Restaurant` (địa chỉ), `BreadcrumbList` (trang con), `Blog`/`BlogPosting` (blog).
+- `sitemap.xml`, `robots.txt`, `llms.txt` (tóm tắt cho AI), `404.html`.
+- Mục Hỏi đáp trên trang chủ trả lời giá, cấp cay, giờ, đậu xe, đặt bàn.
+- Đổi giá hay giờ thì sửa cả: trang, khối JSON-LD trong `<head>`, mục Hỏi đáp và `llms.txt`.

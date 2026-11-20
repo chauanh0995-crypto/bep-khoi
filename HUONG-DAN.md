@@ -47,3 +47,9 @@ Thực đơn đầy đủ nằm trong `thuc-don.html` (trang chủ chỉ có com
 ```
 npx http-server bep-khoi -p 5510
 ```
+
+## Đưa lên mạng
+
+- Kho GitHub: https://github.com/chauanh0995-crypto/bep-khoi (nhánh `main`), GitHub Pages phục vụ thẳng từ nhánh này.
+- Tên miền: suoncaykhonglo.vn (file `CNAME`). DNS tại iNET: 4 bản ghi A cho `@` trỏ 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 và CNAME `www` trỏ `chauanh0995-crypto.github.io`.
+- Cập nhật web: sửa file, rồi `git add -A`, `git commit`, `git push`. Khoảng 1 phút sau web tự cập nhật.

@@ -20,7 +20,7 @@ Mỗi bài là một tệp .html dạng:
 Bài có date <= hôm nay và chưa đăng sẽ được tạo trang, cập nhật blog, sitemap, llms.txt,
 rồi commit + push (trừ khi chạy với --khong-push). Chạy: python -X utf8 tools/dang_bai.py
 """
-import datetime, glob, json, os, re, subprocess, sys, urllib.request
+import datetime, glob, json, os, re, subprocess, sys, time, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://suoncaykhonglo.vn/'
@@ -228,8 +228,29 @@ def indexnow(urls):
     except Exception as e:
         log(f'IndexNow loi (khong anh huong bai da dang): {e}')
 
+def push_with_retry():
+    for attempt in range(6):
+        r = git('push', '-q')
+        if r.returncode == 0:
+            return True
+        log(f'LOI push lan {attempt + 1}: {r.stderr.strip()}')
+        time.sleep(30)
+    return False
+
+def push_backlog(published):
+    """Đẩy các commit đã tạo trên máy nhưng chưa lên GitHub (vd. lần trước mất mạng)."""
+    ahead = git('rev-list', '--count', '@{u}..HEAD')
+    if ahead.returncode != 0 or ahead.stdout.strip() in ('', '0'):
+        return
+    log(f'Con {ahead.stdout.strip()} commit chua len GitHub, day lai')
+    if PUSH and push_with_retry():
+        log('Da day bu len GitHub')
+        recent = [p for p in published if p['date'] >= (datetime.date.fromisoformat(TODAY) - datetime.timedelta(days=3)).isoformat()]
+        indexnow([BASE + f"blog/{p['slug']}/" for p in recent] + [BASE + 'blog/', BASE + 'sitemap.xml'])
+
 def main():
     published = json.load(open(REG, encoding='utf-8')) if os.path.exists(REG) else []
+    push_backlog(published)
     done = {p['slug'] for p in published}
     new = []
     for path in sorted(glob.glob(os.path.join(QUEUE, '*.html'))):
@@ -256,12 +277,8 @@ def main():
     c = git('commit', '-q', '-m', f'Đăng bài blog {TODAY}: {names}')
     if c.returncode != 0:
         log('LOI commit: ' + (c.stderr or c.stdout).strip()); sys.exit(1)
-    for attempt in range(3):
-        r = git('push', '-q')
-        if r.returncode == 0:
-            break
-        log(f'LOI push lan {attempt + 1}: {r.stderr.strip()}')
-    else:
+    if not push_with_retry():
+        log('Chua day duoc, lan chay sau se tu day bu')
         sys.exit(1)
     log('Da push len GitHub')
     indexnow([BASE + f"blog/{p['slug']}/" for p in new] + [BASE + 'blog/', BASE + 'sitemap.xml'])
